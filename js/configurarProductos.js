@@ -8,7 +8,7 @@ if (sesion.sesion=='true') {
 }
 
 
-if (sesion.usuario.tipo=='cliente') {
+if (sesion.tipo=='cliente') {
     window.open('index.html',"_self");
 }
 

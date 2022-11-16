@@ -4,14 +4,14 @@ let imagenes = [];
 //sesion
 
 let sesion = JSON.parse(localStorage.getItem('sesion'));
-
 if (sesion.sesion=='true') {
     let texto = '<a class="navbar-brand" id="is" onclick="cerrarSesion()">Cerrar sesión</a>';
     document.getElementById("is").innerHTML=texto;
 }
 
 
-if (sesion.usuario.tipo=='cliente') {
+
+if (sesion.tipo=='cliente') {
     window.open('index.html',"_self");
 }
 

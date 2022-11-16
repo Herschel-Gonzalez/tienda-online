@@ -1,7 +1,8 @@
 let carrito = [];
-
+let total = 0;
 cargarCarrito();
 mostrarCarrito();
+
 
 //sesion
 
@@ -34,7 +35,7 @@ function cargarCarrito() {
 }
 
 function mostrarCarrito() {
-    let tabla = "<table>";
+    let tabla = "<br><br><table>";
     let table = document.getElementById("contenido");
     tabla+="<thead>";
     tabla+="<tr>";
@@ -57,10 +58,13 @@ function mostrarCarrito() {
 
     let conProductos = false;
 
+
+
     for (const producto of carrito) {
         
-       // console.log(producto);
-        if (producto.sesion.usuario.correo == sesionActual.usuario.correo) {
+        console.log(producto.sesion.usuario.correo);
+        //console.log(sesionActual.usuario);
+        if (producto.sesion.usuario == sesionActual.usuario) {
             tabla+="<tr>";
             tabla+="<td>";
             tabla+=producto.producto.nombre;
@@ -76,18 +80,22 @@ function mostrarCarrito() {
             tabla+="</td>";
             tabla+="</tr>";
             conProductos=true;
+            total+=parseInt(producto.producto.precio,10);
         }
         
     }
+
 
     if (conProductos==false) {
         tabla = "Sin productos en el carrito";
     }else{
         tabla+="</table>";
 
+        tabla+="<br><h3>Total: $"+total+"</h3><br>";
+
         tabla+="<br><button>Proceder al pago</button>";
     
-        tabla+=" <button>Vaciar carrito</button>";
+        tabla+=" <button onclick='vaciarCarrito()'>Vaciar carrito</button>";
     }
 
    
@@ -95,4 +103,20 @@ function mostrarCarrito() {
     table.innerHTML=tabla;
 
 }
+
+function vaciarCarrito() {
+    let sesionActual = JSON.parse(localStorage.getItem('sesion'));
+    let nuevoCarrito = [];
+    for (const producto of carrito) {
+        if (producto.sesion.usuario != sesionActual.usuario) {
+            nuevoCarrito.push(producto);
+        }
+    }
+    localStorage.setItem('carrito',JSON.stringify(nuevoCarrito));
+    alert("se ha vaciado el carrito");
+    cargarCarrito();
+    mostrarCarrito();
+}
+
+
 

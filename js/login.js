@@ -16,8 +16,9 @@ function iniciarSesion() {
             window.open("administrador.html","_self");
             //guardamos la sesion
             let sesion = {
-                usuario: usuario,
-                sesion:"true"
+                usuario: correo,
+                sesion:"true",
+                tipo: usuario.tipo
             };
             localStorage.setItem('sesion', JSON.stringify(sesion));
             if (usuario.tipo == "admin") {

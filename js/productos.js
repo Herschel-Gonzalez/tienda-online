@@ -80,7 +80,7 @@ function modificarProducto(posicion) {
 //carrito
 
 function agregarAlcarrito(posicion) {
-    //cargarCarrito();
+    cargarCarrito();
     let prod = products[posicion];
     let sesion = JSON.parse(localStorage.getItem('sesion'));
     let registro = {
